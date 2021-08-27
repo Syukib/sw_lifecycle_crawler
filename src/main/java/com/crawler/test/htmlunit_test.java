@@ -6,6 +6,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -16,6 +18,10 @@ public class htmlunit_test {
 	
 	
 	public static void main(String[] args) throws IOException {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = new Date();
+		String formatDate = sdf.format(date);
+		
       		String url = "https://www.php.net/eol.php";
 		String version_name = "";
 		String version_rule = "//table/tbody/tr/td[1]";
@@ -27,6 +33,9 @@ public class htmlunit_test {
 		List <HtmlElement> infoListEle_v = (List <HtmlElement>)  EntrancePage.getByXPath(version_rule);
 		List <HtmlElement> infoListEle_e = (List <HtmlElement>)  EntrancePage.getByXPath(date_rule);
 		
+		Files.write(lifecycle_result_data, formatDate.getBytes(),StandardOpenOption.APPEND);
+		Files.write(lifecycle_result_data, "\n".getBytes(),StandardOpenOption.APPEND);
+		
 		for (int i = 0; i < infoListEle_v.size(); i++) {
 			version_name = infoListEle_v.get(i).getTextContent();
 			eol = infoListEle_e.get(i).getTextContent().trim();;
@@ -34,10 +43,10 @@ public class htmlunit_test {
 	        if (!Files.exists(lifecycle_result_data)) {
 	            Files.createFile(lifecycle_result_data);
 	        }
-	        Files.write(lifecycle_result_data, version_name.getBytes(),StandardOpenOption.TRUNCATE_EXISTING);
-	        Files.write(lifecycle_result_data, " , ".getBytes(),StandardOpenOption.TRUNCATE_EXISTING);
-	        Files.write(lifecycle_result_data, eol.getBytes(),StandardOpenOption.TRUNCATE_EXISTING);
-	        Files.write(lifecycle_result_data, "\n".getBytes(),StandardOpenOption.TRUNCATE_EXISTING);
+	        Files.write(lifecycle_result_data, version_name.getBytes(),StandardOpenOption.APPEND);
+	        Files.write(lifecycle_result_data, " , ".getBytes(),StandardOpenOption.APPEND);
+	        Files.write(lifecycle_result_data, eol.getBytes(),StandardOpenOption.APPEND);
+	        Files.write(lifecycle_result_data, "\n".getBytes(),StandardOpenOption.APPEND);
 		}		
 	}
 	
