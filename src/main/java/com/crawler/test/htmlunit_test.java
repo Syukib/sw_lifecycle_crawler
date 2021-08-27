@@ -28,11 +28,12 @@ public class htmlunit_test {
 		String eol = "";
 		String date_rule = "//table/tbody/tr/td[2]";
 		
-		
 		HtmlPage EntrancePage = CrawlerUtils.getPage(url);
 		List <HtmlElement> infoListEle_v = (List <HtmlElement>)  EntrancePage.getByXPath(version_rule);
 		List <HtmlElement> infoListEle_e = (List <HtmlElement>)  EntrancePage.getByXPath(date_rule);
 		
+                Files.write(lifecycle_result_data, "Crawler ran on: ".getBytes(),StandardOpenOption.APPEND);
+                Files.write(lifecycle_result_data, " , ".getBytes(),StandardOpenOption.APPEND);
 		Files.write(lifecycle_result_data, formatDate.getBytes(),StandardOpenOption.APPEND);
 		Files.write(lifecycle_result_data, "\n".getBytes(),StandardOpenOption.APPEND);
 		
