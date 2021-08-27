@@ -34,10 +34,10 @@ public class htmlunit_test {
 	        if (!Files.exists(lifecycle_result_data)) {
 	            Files.createFile(lifecycle_result_data);
 	        }
-	        Files.write(lifecycle_result_data, version_name.getBytes(), StandardOpenOption.APPEND);
-	        Files.write(lifecycle_result_data, " , ".getBytes(), StandardOpenOption.APPEND);
-	        Files.write(lifecycle_result_data, eol.getBytes(), StandardOpenOption.APPEND);
-	        Files.write(lifecycle_result_data, "\n".getBytes(), StandardOpenOption.APPEND);
+	        Files.write(lifecycle_result_data, version_name.getBytes());
+	        Files.write(lifecycle_result_data, " , ".getBytes());
+	        Files.write(lifecycle_result_data, eol.getBytes());
+	        Files.write(lifecycle_result_data, "\n".getBytes());
 		}		
 	}
 	
